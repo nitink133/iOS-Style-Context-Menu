@@ -15,11 +15,16 @@ import androidx.compose.ui.unit.dp
 import club.stockgro.pocchatlongpress.ui.theme.WhatsAppTheme
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Scaffold
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.draw.blur
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -43,6 +48,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun AppContent() {
+
     Scaffold(
         topBar = {
             ChatScreenToolbar(
@@ -53,12 +59,21 @@ fun AppContent() {
             )
         },
     ) { innerPadding ->
+        val showContextMenu = remember { mutableStateOf(false) }
 
         Box(
-            modifier = Modifier
+            modifier = if (showContextMenu.value) Modifier
+                .fillMaxSize()
+                .padding(innerPadding)
+                .blur(5.dp)
+                .clickable {
+                    // When clicking outside the menu, it will close the menu
+                    showContextMenu.value = false
+                } else Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
         ) {
+
             //            region Screen Background Image
             Image(
                 painter = painterResource(id = R.drawable.background_chat),
@@ -80,8 +95,6 @@ fun AppContent() {
             )
 //endregion
 
-            Spacer(modifier = Modifier.height(40.dp))
-
             // Your chat messages go here
             val sampleMessages = listOf(
                 Message("Hello!", isSender = false),
@@ -97,7 +110,10 @@ fun AppContent() {
             )
 
             Surface(color = Color.Transparent) {
-                ChatMessageList(messages = sampleMessages)
+                ChatMessageList(messages = sampleMessages) {
+                    println("Nitin $it")
+                    showContextMenu.value = it
+                }
             }
 
             // Message input field
