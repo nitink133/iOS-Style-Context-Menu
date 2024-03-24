@@ -22,13 +22,13 @@ To use this context menu in your project, follow these steps:
 
 See the context menu in action:
 
-![Demo Video](https://github.com/nitink133/iOS-Style-Context-Menu/blob/main/VIDEO-2024-03-04-11-28-54.mp4)
+[Demo Video](https://github.com/nitink133/iOS-Style-Context-Menu/blob/main/VIDEO-2024-03-04-11-28-54.mp4)
 
 ## Download
 
 Try out the sample app by downloading the APK:
 
-[Download APK](https://github.com/nitink133/iOS-Style-Context-Menu/blob/main/Chat POC.apk)
+[Download APK](https://github.com/nitink133/iOS-Style-Context-Menu/blob/main/Chat%20POC.apk)
 
 ## Contributing
 
